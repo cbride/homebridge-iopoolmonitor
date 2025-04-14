@@ -5,7 +5,7 @@ import { PoolModel } from '../models/poolModel';
 export class IopoolApi {
   private readonly _instance: AxiosInstance | null;
 
-  constructor(token) {
+  constructor(token: any) {
     this._instance = axios.create({
       baseURL: 'https://api.iopool.com/v1',
       timeout: 1000,
