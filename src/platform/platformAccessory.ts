@@ -35,10 +35,10 @@ export class IopoolPlatformAccessory {
       .onGet(this.handleTemperatureDataGet.bind(this));
 
     this.phService = this.accessory.getService('ph-sensor') ||
-                    this.accessory.addService(this.platform.Service.FilterMaintenance, pool.title + ' - pH', 'ph-sensor');
-    this.phService.getCharacteristic(this.platform.Characteristic.FilterChangeIndication)
+                    this.accessory.addService(this.platform.Service.AirQualitySensor, pool.title + ' - pH', 'ph-sensor');
+    this.phService.getCharacteristic(this.platform.Characteristic.AirQuality)
       .onGet(this.handleCurrentPhGet.bind(this));
-    this.phService.getCharacteristic(this.platform.Characteristic.FilterLifeLevel)
+    this.phService.getCharacteristic(this.platform.Characteristic.OzoneDensity)
       .onGet(this.handleCurrentPhLevelGet.bind(this));
     this.phService.getCharacteristic(this.platform.Characteristic.ProductData)
       .onGet(this.handlePhDataGet.bind(this));
@@ -102,28 +102,16 @@ export class IopoolPlatformAccessory {
     const ph = pool.latestMeasure ? pool.latestMeasure.ph : 0;
 
     return (ph < this.config.PhMin || ph > this.config.PhMax) ?
-      this.platform.Characteristic.FilterChangeIndication.CHANGE_FILTER :
-      this.platform.Characteristic.FilterChangeIndication.FILTER_OK;
+      this.platform.Characteristic.AirQuality.POOR :
+      this.platform.Characteristic.AirQuality.GOOD;
   }
 
   async handleCurrentPhLevelGet(): Promise<CharacteristicValue> {
     const pool = this.accessory.context.device as PoolModel;
+
     const ph = pool.latestMeasure ? pool.latestMeasure.ph : 0;
 
-    const midValue = (this.config.PhMax - this.config.PhMin) / 2 + this.config.PhMin;
-    if (ph < this.config.PhMin || ph > this.config.PhMax) {
-      return 0;
-    } else if (ph < midValue) {
-      const minValue = this.config.PhMin;
-      const maxValue = midValue;
-      return Math.round(((ph - minValue) / (maxValue - minValue)) * 100);
-    } else if (ph > midValue) {
-      const minValue = midValue;
-      const maxValue = this.config.PhMax;
-      return 100 - Math.round(((ph - minValue) / (maxValue - minValue)) * 100);
-    } else {
-      return 100;
-    }
+    return ph.toString();
   }
 
   async handlePhDataGet(): Promise<CharacteristicValue> {
