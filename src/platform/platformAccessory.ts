@@ -35,31 +35,23 @@ export class IopoolPlatformAccessory {
       .onGet(this.handleTemperatureDataGet.bind(this));
 
     this.phService = this.accessory.getService('ph-sensor') ||
-      this.accessory.addService(this.platform.Service.AirQualitySensor, pool.title + ' - pH', 'ph-sensor');
+      this.accessory.addService(this.platform.Service.AirQualitySensor, 'pH - ' + pool.title, 'ph-sensor');
     this.phService.getCharacteristic(this.platform.Characteristic.Name)
-      .setValue(pool.title + ' - pH');
+      .setValue('pH');
     this.phService.getCharacteristic(this.platform.Characteristic.AirQuality)
       .onGet(this.handleCurrentPhGet.bind(this));
     this.phService.getCharacteristic(this.platform.Characteristic.OzoneDensity)
-      .onGet(this.handleCurrentPhLevelGet.bind(this));
-    this.phService.getCharacteristic(this.platform.Characteristic.NitrogenDioxideDensity)
-      .onGet(this.handleCurrentPhLevelGet.bind(this));
-    this.phService.getCharacteristic(this.platform.Characteristic.PM10Density)
-      .onGet(this.handleCurrentPhLevelGet.bind(this));
-    this.phService.getCharacteristic(this.platform.Characteristic.PM2_5Density)
       .onGet(this.handleCurrentPhLevelGet.bind(this));
     this.phService.getCharacteristic(this.platform.Characteristic.ProductData)
       .onGet(this.handlePhDataGet.bind(this));
 
     this.orpService = this.accessory.getService('orp-sensor') ||
-      this.accessory.addService(this.platform.Service.AirQualitySensor, pool.title + ' - ORP', 'orp-sensor');
+      this.accessory.addService(this.platform.Service.AirQualitySensor, 'ORP - ' + pool.title, 'orp-sensor');
     this.orpService.getCharacteristic(this.platform.Characteristic.Name)
-      .setValue(pool.title + ' - ORP');
+      .setValue('ORP');
     this.orpService.getCharacteristic(this.platform.Characteristic.AirQuality)
       .onGet(this.handleCurrentOrpGet.bind(this));
     this.orpService.getCharacteristic(this.platform.Characteristic.VOCDensity)
-      .onGet(this.handleCurrentOrpLevelGet.bind(this));
-    this.orpService.getCharacteristic(this.platform.Characteristic.SulphurDioxideDensity)
       .onGet(this.handleCurrentOrpLevelGet.bind(this));
     this.orpService.getCharacteristic(this.platform.Characteristic.ProductData)
       .onGet(this.handleOrpDataGet.bind(this));
@@ -81,20 +73,12 @@ export class IopoolPlatformAccessory {
         this.phService.updateCharacteristic(
           this.platform.Characteristic.OzoneDensity, await this.handleCurrentPhLevelGet());
         this.phService.updateCharacteristic(
-          this.platform.Characteristic.NitrogenDioxideDensity, await this.handleCurrentPhLevelGet());
-        this.phService.updateCharacteristic(
-          this.platform.Characteristic.PM10Density, await this.handleCurrentPhLevelGet());
-        this.phService.updateCharacteristic(
-          this.platform.Characteristic.PM2_5Density, await this.handleCurrentPhLevelGet());
-        this.phService.updateCharacteristic(
           this.platform.Characteristic.ProductData, await this.handlePhDataGet());
 
         this.orpService.updateCharacteristic(
           this.platform.Characteristic.AirQuality, await this.handleCurrentOrpGet());
         this.orpService.updateCharacteristic(
           this.platform.Characteristic.VOCDensity, await this.handleCurrentOrpLevelGet());
-        this.orpService.updateCharacteristic(
-          this.platform.Characteristic.SulphurDioxideDensity, await this.handleCurrentOrpLevelGet());
         this.orpService.updateCharacteristic(
           this.platform.Characteristic.ProductData, await this.handleOrpDataGet());
       } else {
