@@ -1,22 +1,24 @@
 {
-  "name": "homebridge-plugin-name",
-  "displayName": "Plugin Name",
-  "type": "module",
-  "version": "1.0.0",
-  "private": true,
-  "description": "A short description about what your plugin does.",
-  "author": "Your Name",
+  "displayName": "Homebridge iopool",
+  "name": "homebridge-iopool",
+  "version": "0.3.0",
+  "description": "a small plugin to monitor your swimming pool(s) using iopool.",
+  "author": {
+    "name": "Vincent CIBELLI",
+    "email": "contact@vincidev.com"
+  },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/USERNAME/GITHUB_PROJECT_NAME#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "https://github.com/GurYN/homebridge-iopool.git"
   },
+  "homepage": "https://github.com/GurYN/homebridge-iopool#readme",
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/GurYN/homebridge-iopool/issues"
   },
   "keywords": [
-    "homebridge-plugin"
+    "homebridge-plugin",
+    "iopool"
   ],
   "main": "dist/index.js",
   "engines": {
@@ -30,6 +32,7 @@
     "watch": "npm run build && npm link && nodemon"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "homebridge-lib": "^7.1.4"
   },
   "devDependencies": {
