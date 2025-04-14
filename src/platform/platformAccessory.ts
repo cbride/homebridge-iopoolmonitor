@@ -28,26 +28,38 @@ export class IopoolPlatformAccessory {
       .setCharacteristic(this.platform.Characteristic.InUse, pool.mode === 'STANDARD');
 
     this.tempService = this.accessory.getService('temperature-sensor') ||
-                   this.accessory.addService(this.platform.Service.TemperatureSensor, pool.title + ' - Temperature', 'temperature-sensor');
+      this.accessory.addService(this.platform.Service.TemperatureSensor, pool.title + ' - Temperature', 'temperature-sensor');
     this.tempService.getCharacteristic(this.platform.Characteristic.CurrentTemperature)
       .onGet(this.handleCurrentTemperatureGet.bind(this));
     this.tempService.getCharacteristic(this.platform.Characteristic.ProductData)
       .onGet(this.handleTemperatureDataGet.bind(this));
 
     this.phService = this.accessory.getService('ph-sensor') ||
-                    this.accessory.addService(this.platform.Service.AirQualitySensor, pool.title + ' - pH', 'ph-sensor');
+      this.accessory.addService(this.platform.Service.AirQualitySensor, pool.title + ' - pH', 'ph-sensor');
+    this.phService.getCharacteristic(this.platform.Characteristic.Name)
+      .setValue(pool.title + ' - pH');
     this.phService.getCharacteristic(this.platform.Characteristic.AirQuality)
       .onGet(this.handleCurrentPhGet.bind(this));
     this.phService.getCharacteristic(this.platform.Characteristic.OzoneDensity)
+      .onGet(this.handleCurrentPhLevelGet.bind(this));
+    this.phService.getCharacteristic(this.platform.Characteristic.NitrogenDioxideDensity)
+      .onGet(this.handleCurrentPhLevelGet.bind(this));
+    this.phService.getCharacteristic(this.platform.Characteristic.PM10Density)
+      .onGet(this.handleCurrentPhLevelGet.bind(this));
+    this.phService.getCharacteristic(this.platform.Characteristic.PM2_5Density)
       .onGet(this.handleCurrentPhLevelGet.bind(this));
     this.phService.getCharacteristic(this.platform.Characteristic.ProductData)
       .onGet(this.handlePhDataGet.bind(this));
 
     this.orpService = this.accessory.getService('orp-sensor') ||
-                    this.accessory.addService(this.platform.Service.FilterMaintenance, pool.title + ' - ORP', 'orp-sensor');
-    this.orpService.getCharacteristic(this.platform.Characteristic.FilterChangeIndication)
+      this.accessory.addService(this.platform.Service.AirQualitySensor, pool.title + ' - ORP', 'orp-sensor');
+    this.orpService.getCharacteristic(this.platform.Characteristic.Name)
+      .setValue(pool.title + ' - ORP');
+    this.orpService.getCharacteristic(this.platform.Characteristic.AirQuality)
       .onGet(this.handleCurrentOrpGet.bind(this));
-    this.orpService.getCharacteristic(this.platform.Characteristic.FilterLifeLevel)
+    this.orpService.getCharacteristic(this.platform.Characteristic.VOCDensity)
+      .onGet(this.handleCurrentOrpLevelGet.bind(this));
+    this.orpService.getCharacteristic(this.platform.Characteristic.SulphurDioxideDensity)
       .onGet(this.handleCurrentOrpLevelGet.bind(this));
     this.orpService.getCharacteristic(this.platform.Characteristic.ProductData)
       .onGet(this.handleOrpDataGet.bind(this));
@@ -69,12 +81,20 @@ export class IopoolPlatformAccessory {
         this.phService.updateCharacteristic(
           this.platform.Characteristic.OzoneDensity, await this.handleCurrentPhLevelGet());
         this.phService.updateCharacteristic(
+          this.platform.Characteristic.NitrogenDioxideDensity, await this.handleCurrentPhLevelGet());
+        this.phService.updateCharacteristic(
+          this.platform.Characteristic.PM10Density, await this.handleCurrentPhLevelGet());
+        this.phService.updateCharacteristic(
+          this.platform.Characteristic.PM2_5Density, await this.handleCurrentPhLevelGet());
+        this.phService.updateCharacteristic(
           this.platform.Characteristic.ProductData, await this.handlePhDataGet());
 
         this.orpService.updateCharacteristic(
-          this.platform.Characteristic.FilterChangeIndication, await this.handleCurrentOrpGet());
+          this.platform.Characteristic.AirQuality, await this.handleCurrentOrpGet());
         this.orpService.updateCharacteristic(
-          this.platform.Characteristic.FilterLifeLevel, await this.handleCurrentOrpLevelGet());
+          this.platform.Characteristic.VOCDensity, await this.handleCurrentOrpLevelGet());
+        this.orpService.updateCharacteristic(
+          this.platform.Characteristic.SulphurDioxideDensity, await this.handleCurrentOrpLevelGet());
         this.orpService.updateCharacteristic(
           this.platform.Characteristic.ProductData, await this.handleOrpDataGet());
       } else {
@@ -94,7 +114,7 @@ export class IopoolPlatformAccessory {
 
     const temperature = pool.latestMeasure ? pool.latestMeasure.temperature : 0;
 
-    return 'temperature: ' + temperature.toString() ;
+    return 'temperature: ' + temperature.toString();
   }
 
   async handleCurrentPhGet(): Promise<CharacteristicValue> {
@@ -111,7 +131,7 @@ export class IopoolPlatformAccessory {
 
     const ph = pool.latestMeasure ? pool.latestMeasure.ph : 0;
 
-    return ph.toString();
+    return ph * 10
   }
 
   async handlePhDataGet(): Promise<CharacteristicValue> {
@@ -127,28 +147,15 @@ export class IopoolPlatformAccessory {
     const orp = pool.latestMeasure ? pool.latestMeasure.orp : 0;
 
     return (orp < this.config.OrpMin || orp > this.config.OrpMax) ?
-      this.platform.Characteristic.FilterChangeIndication.CHANGE_FILTER :
-      this.platform.Characteristic.FilterChangeIndication.FILTER_OK;
+      this.platform.Characteristic.AirQuality.POOR :
+      this.platform.Characteristic.AirQuality.GOOD;
   }
 
   async handleCurrentOrpLevelGet(): Promise<CharacteristicValue> {
     const pool = this.accessory.context.device as PoolModel;
     const orp = pool.latestMeasure ? pool.latestMeasure.orp : 0;
 
-    const midValue = (this.config.OrpMax - this.config.OrpMin) / 2 + this.config.OrpMin;
-    if (orp < this.config.OrpMin || orp > this.config.OrpMax) {
-      return 0;
-    } else if (orp < midValue) {
-      const minValue = this.config.OrpMin;
-      const maxValue = midValue;
-      return Math.round(((orp - minValue) / (maxValue - minValue)) * 100);
-    } else if (orp > midValue) {
-      const minValue = midValue;
-      const maxValue = this.config.OrpMax;
-      return 100 - Math.round(((orp - minValue) / (maxValue - minValue)) * 100);
-    } else {
-      return 100;
-    }
+    return orp;
   }
 
   async handleOrpDataGet(): Promise<CharacteristicValue> {
