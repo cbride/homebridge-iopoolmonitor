@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-import { PoolModel } from '../models/poolModel';
+import { PoolModel } from '../models/poolModel.js';
 
 export class IopoolApi {
   private readonly _instance: AxiosInstance | null;

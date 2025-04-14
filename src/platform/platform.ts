@@ -1,9 +1,9 @@
 import { API, DynamicPlatformPlugin, Logger, PlatformAccessory, PlatformConfig, Service, Characteristic } from 'homebridge';
 
-import { PLATFORM_NAME, PLUGIN_NAME } from '../settings';
-import { IopoolPlatformAccessory } from './platformAccessory';
+import { PLATFORM_NAME, PLUGIN_NAME } from '../settings.js';
+import { IopoolPlatformAccessory } from './platformAccessory.js';
 
-import { IopoolApi } from '../services/iopoolApi';
+import { IopoolApi } from '../services/iopoolApi.js';
 
 export class IopoolHomebridgePlatform implements DynamicPlatformPlugin {
   public readonly Service: typeof Service = this.api.hap.Service;

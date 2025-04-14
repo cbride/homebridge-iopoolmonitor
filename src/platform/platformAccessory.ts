@@ -1,9 +1,9 @@
 import { Service, PlatformAccessory, CharacteristicValue, PlatformConfig } from 'homebridge';
 
-import { IopoolHomebridgePlatform } from './platform';
+import { IopoolHomebridgePlatform } from './platform.js';
 
-import { IopoolApi } from '../services/iopoolApi';
-import { PoolModel } from '../models/poolModel';
+import { IopoolApi } from '../services/iopoolApi.js';
+import { PoolModel } from '../models/poolModel.js';
 
 export class IopoolPlatformAccessory {
   private tempService: Service;

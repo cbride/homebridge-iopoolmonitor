@@ -1,5 +1,5 @@
-import { LatestMeasureModel } from './latestMeasureModel';
-import { AdviceModel } from './adviseModel';
+import { LatestMeasureModel } from './latestMeasureModel.js';
+import { AdviceModel } from './adviseModel.js';
 
 export interface PoolModel {
     id: string;
