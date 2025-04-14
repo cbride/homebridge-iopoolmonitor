@@ -1,5 +1,5 @@
 {
-  "pluginAlias": "HomebridgeIopool2",
+  "pluginAlias": "HomebridgeIopoolMonitor",
   "pluginType": "platform",
   "singular": true,
   "strictValidation": false,

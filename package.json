@@ -1,6 +1,6 @@
 {
   "displayName": "Homebridge iopool",
-  "name": "homebridge-iopool2",
+  "name": "homebridge-iopoolmonitor",
   "version": "0.5.0",
   "description": "a small plugin to monitor your swimming pool(s) using iopool.",
   "author": {
@@ -10,11 +10,11 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cbride/homebridge-iopool.git"
+    "url": "https://github.com/cbride/homebridge-iopoolmonitor.git"
   },
-  "homepage": "https://github.com/cbride/homebridge-iopool#readme",
+  "homepage": "https://github.com/cbride/homebridge-iopoolmonitor#readme",
   "bugs": {
-    "url": "https://github.com/cbride/homebridge-iopool/issues"
+    "url": "https://github.com/cbride/homebridge-iopoolmonitor/issues"
   },
   "keywords": [
     "homebridge-plugin",
