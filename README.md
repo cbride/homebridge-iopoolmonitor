@@ -19,7 +19,7 @@ You need to configure the plugin before using it. Please see the config settings
 "platforms": [
         ...,
         {
-            "platform": "HomebridgeIopool",
+            "platform": "HomebridgeIopool2",
             "name": "iopool",
             "token": "[YOUR IOPOOL TOKEN]",
             "delay": 15,
