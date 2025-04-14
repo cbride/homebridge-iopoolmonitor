@@ -107,9 +107,9 @@ export class IopoolPlatformAccessory {
 
     if (ph == 0) {
       return this.platform.Characteristic.AirQuality.UNKNOWN
-    } else if (ph < this.config.phMinAlert || ph > this.config.phMaxAlert) {
+    } else if (ph < this.config.pHMinAlert || ph > this.config.pHMaxAlert) {
       return this.platform.Characteristic.AirQuality.POOR
-    } else if (ph < this.config.phMinWarn || ph > this.config.phMaxWarn) {
+    } else if (ph < this.config.pHMinWarn || ph > this.config.pHMaxWarn) {
       return this.platform.Characteristic.AirQuality.INFERIOR
     } else {
       return this.platform.Characteristic.AirQuality.GOOD

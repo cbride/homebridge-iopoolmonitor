@@ -27,7 +27,7 @@
         "minimum": 5,
         "maximum": 60
       },
-      "PhMinWarn": {
+      "pHMinWarn": {
         "title": "pH Minimum Warning Level",
         "type": "number",
         "required": true,
@@ -35,7 +35,7 @@
         "minimum": 5.0,
         "maximum": 10.0
       },
-      "PhMinAlert": {
+      "pHMinAlert": {
         "title": "pH Minimum Alert Level",
         "type": "number",
         "required": true,
@@ -43,7 +43,7 @@
         "minimum": 5.0,
         "maximum": 10.0
       },
-      "PhMaxWarn": {
+      "pHMaxWarn": {
         "title": "pH Maximum Warning Level",
         "type": "number",
         "required": true,
@@ -51,7 +51,7 @@
         "minimum": 5.0,
         "maximum": 10.0
       },
-      "PhMaxAlert": {
+      "pHMaxAlert": {
         "title": "pH Maximum Alert Level",
         "type": "number",
         "required": true,
