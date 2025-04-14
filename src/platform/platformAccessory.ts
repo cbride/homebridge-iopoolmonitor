@@ -65,9 +65,9 @@ export class IopoolPlatformAccessory {
           this.platform.Characteristic.ProductData, await this.handleTemperatureDataGet());
 
         this.phService.updateCharacteristic(
-          this.platform.Characteristic.FilterChangeIndication, await this.handleCurrentPhGet());
+          this.platform.Characteristic.AirQuality, await this.handleCurrentPhGet());
         this.phService.updateCharacteristic(
-          this.platform.Characteristic.FilterLifeLevel, await this.handleCurrentPhLevelGet());
+          this.platform.Characteristic.OzoneDensity, await this.handleCurrentPhLevelGet());
         this.phService.updateCharacteristic(
           this.platform.Characteristic.ProductData, await this.handlePhDataGet());
 
