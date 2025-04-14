@@ -23,41 +23,73 @@
         "title": "Refresh Delay (in min)",
         "type": "number",
         "required": true,
-        "default": 10,
-        "minimum": 1,
+        "default": 15,
+        "minimum": 5,
         "maximum": 60
       },
-      "PhMin": {
-        "title": "pH Minimum",
+      "PhMinWarn": {
+        "title": "pH Minimum Warning Level",
         "type": "number",
         "required": true,
         "default": 7.1,
-        "minimum": 6.8,
-        "maximum": 8.1
+        "minimum": 5.0,
+        "maximum": 10.0
       },
-      "PhMax": {
-        "title": "pH Maximum",
+      "PhMinAlert": {
+        "title": "pH Minimum Alert Level",
+        "type": "number",
+        "required": true,
+        "default": 6.8,
+        "minimum": 5.0,
+        "maximum": 10.0
+      },
+      "PhMaxWarn": {
+        "title": "pH Maximum Warning Level",
         "type": "number",
         "required": true,
         "default": 7.7,
-        "minimum": 6.8,
-        "maximum": 8.1
+        "minimum": 5.0,
+        "maximum": 10.0
       },
-      "OrpMin": {
-        "title": "Orp Minimum",
+      "PhMaxAlert": {
+        "title": "pH Maximum Alert Level",
+        "type": "number",
+        "required": true,
+        "default": 8.1,
+        "minimum": 5.0,
+        "maximum": 10.0
+      },
+      "OrpMinWarn": {
+        "title": "Orp Minimum Warning Level",
         "type": "number",
         "required": true,
         "default": 650,
-        "minimum": 550,
-        "maximum": 1000
+        "minimum": 100,
+        "maximum": 2000
       },
-      "OrpMax": {
-        "title": "Orp Maximum",
+      "OrpMinAlert": {
+        "title": "Orp Minimum Alert Level",
+        "type": "number",
+        "required": true,
+        "default": 550,
+        "minimum": 100,
+        "maximum": 2000
+      },
+      "OrpMaxWarn": {
+        "title": "Orp Maximum Warning Level",
         "type": "number",
         "required": true,
         "default": 800,
-        "minimum": 550,
-        "maximum": 1000
+        "minimum": 100,
+        "maximum": 2000
+      },
+      "OrpMaxAlert": {
+        "title": "Orp Maximum Alert Level",
+        "type": "number",
+        "required": true,
+        "default": 1000,
+        "minimum": 100,
+        "maximum": 2000
       }
     }
   }

@@ -105,9 +105,15 @@ export class IopoolPlatformAccessory {
     const pool = this.accessory.context.device as PoolModel;
     const ph = pool.latestMeasure ? pool.latestMeasure.ph : 0;
 
-    return (ph < this.config.PhMin || ph > this.config.PhMax) ?
-      this.platform.Characteristic.AirQuality.POOR :
-      this.platform.Characteristic.AirQuality.GOOD;
+    if (ph == 0) {
+      return this.platform.Characteristic.AirQuality.UNKNOWN
+    } else if (ph < this.config.phMinAlert || ph > this.config.phMaxAlert) {
+      return this.platform.Characteristic.AirQuality.POOR
+    } else if (ph < this.config.phMinWarn || ph > this.config.phMaxWarn) {
+      return this.platform.Characteristic.AirQuality.INFERIOR
+    } else {
+      return this.platform.Characteristic.AirQuality.GOOD
+    };
   }
 
   async handleCurrentPhLevelGet(): Promise<CharacteristicValue> {
@@ -130,9 +136,15 @@ export class IopoolPlatformAccessory {
     const pool = this.accessory.context.device as PoolModel;
     const orp = pool.latestMeasure ? pool.latestMeasure.orp : 0;
 
-    return (orp < this.config.OrpMin || orp > this.config.OrpMax) ?
-      this.platform.Characteristic.AirQuality.POOR :
-      this.platform.Characteristic.AirQuality.GOOD;
+    if (orp == 0) {
+      return this.platform.Characteristic.AirQuality.UNKNOWN
+    } else if (orp < this.config.OrpMinAlert || orp > this.config.OrpMaxAlert) {
+      return this.platform.Characteristic.AirQuality.POOR
+    } else if (orp < this.config.OrpMinWarn || orp > this.config.OrpMaxWarn) {
+      return this.platform.Characteristic.AirQuality.INFERIOR
+    } else {
+      return this.platform.Characteristic.AirQuality.GOOD
+    };
   }
 
   async handleCurrentOrpLevelGet(): Promise<CharacteristicValue> {
