@@ -4,17 +4,17 @@
   "version": "0.3.0",
   "description": "a small plugin to monitor your swimming pool(s) using iopool.",
   "author": {
-    "name": "Vincent CIBELLI",
-    "email": "contact@vincidev.com"
+    "name": "Chris Bride",
+    "email": "cbride@gmail.com"
   },
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GurYN/homebridge-iopool.git"
+    "url": "https://github.com/cbride/homebridge-iopool.git"
   },
-  "homepage": "https://github.com/GurYN/homebridge-iopool#readme",
+  "homepage": "https://github.com/cbride/homebridge-iopool#readme",
   "bugs": {
-    "url": "https://github.com/GurYN/homebridge-iopool/issues"
+    "url": "https://github.com/cbride/homebridge-iopool/issues"
   },
   "keywords": [
     "homebridge-plugin",
