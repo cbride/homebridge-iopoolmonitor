@@ -1,7 +1,7 @@
 {
   "displayName": "Homebridge iopool",
   "name": "homebridge-iopoolmonitor",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "a small plugin to monitor your swimming pool(s) using iopool.",
   "author": {
     "name": "Chris Bride",

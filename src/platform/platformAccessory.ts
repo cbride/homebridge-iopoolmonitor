@@ -152,9 +152,9 @@ export class IopoolPlatformAccessory {
     const orp = pool.latestMeasure ? pool.latestMeasure.orp : 0;
 
     if (orp > 1000) {
-      return orp
-    } else {
       return 1000
+    } else {
+      return orp
     };
   }
 
