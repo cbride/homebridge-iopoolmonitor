@@ -1,6 +1,14 @@
 # homebridge-iopoolmonitor
 
-A small Homebridge plugin to monitor your swimming pool(s) using [iopool](https://iopool.com) product & service. This plugin monitor Temperature, pH, and ORP.
+A small Homebridge plugin to monitor your swimming pool(s) using [iopool](https://iopool.com) product & service. This plugin will monitor Temperature, pH, and ORP.\
+\
+pH and ORP are shown as air quality sensors and show their respective values as ozone density. You can specify a warning and an alert threshold to cause the "air quality" sensor to display good, inferior, or poor quality based on compliance.\
+Due to limitations of the ozone density characteristic, the following workarounds are in place for displaying values in the Home app:
+* pH displayed is multiplied by 10 to preserve the value after the decimal point.
+* ORP displays a maximum of 1000 as it is the maximum value for the characteristic.
+These are for display purposes only. The true values are still used for calculating compliance and accurate values should be used in your Homebridge configuration.\
+\
+Based on https://github.com/GurYN/homebridge-iopool
 
 ![Preview](./assets/preview.jpg)
 
