@@ -1,15 +1,15 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosHeaderValue, AxiosInstance } from 'axios';
 
 import { PoolModel } from '../models/poolModel.js';
 
 export class IopoolApi {
   private readonly _instance: AxiosInstance | null;
 
-  constructor(token: any) {
+  constructor(token: AxiosHeaderValue) {
     this._instance = axios.create({
       baseURL: 'https://api.iopool.com/v1',
       timeout: 1000,
-      headers: {'x-api-key': token},
+      headers: { 'x-api-key': token },
     });
   }
 

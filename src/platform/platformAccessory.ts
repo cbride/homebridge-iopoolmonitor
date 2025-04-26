@@ -105,14 +105,14 @@ export class IopoolPlatformAccessory {
     const pool = this.accessory.context.device as PoolModel;
     const ph = pool.latestMeasure ? pool.latestMeasure.ph : 0;
 
-    if (ph == 0) {
-      return this.platform.Characteristic.AirQuality.UNKNOWN
+    if (ph === 0) {
+      return this.platform.Characteristic.AirQuality.UNKNOWN;
     } else if (ph <= this.config.pHMinAlert || ph >= this.config.pHMaxAlert) {
-      return this.platform.Characteristic.AirQuality.POOR
+      return this.platform.Characteristic.AirQuality.POOR;
     } else if (ph < this.config.pHMinWarn || ph > this.config.pHMaxWarn) {
-      return this.platform.Characteristic.AirQuality.INFERIOR
+      return this.platform.Characteristic.AirQuality.INFERIOR;
     } else {
-      return this.platform.Characteristic.AirQuality.GOOD
+      return this.platform.Characteristic.AirQuality.GOOD;
     };
   }
 
@@ -121,7 +121,7 @@ export class IopoolPlatformAccessory {
 
     const ph = pool.latestMeasure ? pool.latestMeasure.ph : 0;
 
-    return ph * 10
+    return ph * 10;
   }
 
   async handlePhDataGet(): Promise<CharacteristicValue> {
@@ -136,14 +136,14 @@ export class IopoolPlatformAccessory {
     const pool = this.accessory.context.device as PoolModel;
     const orp = pool.latestMeasure ? pool.latestMeasure.orp : 0;
 
-    if (orp == 0) {
-      return this.platform.Characteristic.AirQuality.UNKNOWN
+    if (orp === 0) {
+      return this.platform.Characteristic.AirQuality.UNKNOWN;
     } else if (orp <= this.config.OrpMinAlert || orp >= this.config.OrpMaxAlert) {
-      return this.platform.Characteristic.AirQuality.POOR
+      return this.platform.Characteristic.AirQuality.POOR;
     } else if (orp < this.config.OrpMinWarn || orp > this.config.OrpMaxWarn) {
-      return this.platform.Characteristic.AirQuality.INFERIOR
+      return this.platform.Characteristic.AirQuality.INFERIOR;
     } else {
-      return this.platform.Characteristic.AirQuality.GOOD
+      return this.platform.Characteristic.AirQuality.GOOD;
     };
   }
 
@@ -152,9 +152,9 @@ export class IopoolPlatformAccessory {
     const orp = pool.latestMeasure ? pool.latestMeasure.orp : 0;
 
     if (orp > 1000) {
-      return 1000
+      return 1000;
     } else {
-      return orp
+      return orp;
     };
   }
 
